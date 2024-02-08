@@ -28,10 +28,10 @@ app.secret_key = binascii.b2a_hex(os.urandom(15))
 user_dao = UserDao("users.db")
 user_dao.create_table()
 
-print(colored("Starting AI API..", "green"))
+print(colored("Starting AI API..", "green"))    
 
-if torch.cuda.is_available():
-    print(colored("\t=> Using GPU.", "blue"))
+if torch.cuda.is_available():   
+    print(colored("\t=> Using GPU.", "blue"))   
     device = torch.device("cuda")
 else:
     print(colored("\t=> Using CPU (Wrapper API).", "blue"))
@@ -42,8 +42,8 @@ MODELS = ("v1", "v2", "v2-beta", "v3", "lexica", "prodia")
 
 # Configure user_loader function to load user objects
 @login_manager.user_loader
-def load_user(user_id):
-    print(colored("Loading user..", "green"))
+def load_user(user_id): 
+    print(colored("Loading user..", "green"))   
     user = user_dao.get_user_by_id(int(user_id))
     return User(user[0]) if user else None
 
@@ -65,8 +65,8 @@ def help():
 def create_user():
     if request.method == "POST":
         data = request.get_json()
-        username = data["username"]
-        password = data["password"]
+        username = data["username"] 
+        password = data["password"] 
         created_at = str(datetime.now())
         api_key = data["api_key"]
 
@@ -91,10 +91,10 @@ def create_user():
 
 
 @app.route("/login", methods=["POST"])
-def login():
-    if request.method == "POST":
-        data = request.get_json()
-        username = data["username"]
+def login():    
+    if request.method == "POST":    
+        data = request.get_json()   
+        username = data["username"] 
         password = data["password"]
 
         if username is None or password is None:
